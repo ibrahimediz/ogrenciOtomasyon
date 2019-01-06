@@ -30,7 +30,14 @@ class VeriTabani():
             if key.upper() == "TABLO":
                 sonuc = value
         return sonuc
-
+    
+    def IDBul(self):
+        sonuc = ""
+        for key,value in self.sozluk.items():
+            if key.upper() == "ID":
+                sonuc = value
+        return sonuc
+    
     def SutunBul(self):
         liste = []
         for key,value in self.sozluk.items():
@@ -50,7 +57,7 @@ class VeriTabani():
         adim = 0
         self.sozluk = kwargs
         try:
-            adim = "1"
+            adim = "-1"
             baglanti = sqlite3.connect(self.adres)
             adim = "1A"
             cur = baglanti.cursor()
@@ -76,6 +83,52 @@ class VeriTabani():
             baglanti.commit()
             baglanti.close()
             return adim    
-
+    def UpdateWithID(self,**kwargs):
+            import sqlite3
+            adim = 0
+            self.sozluk = kwargs
+            try:
+                adim = "-1"
+                baglanti = sqlite3.connect(self.adres)
+                adim = "1A"
+                cur = baglanti.cursor()
+                sorgu = "UPDATE  "
+                if self.TabloIsmiBul():
+                    sorgu += self.TabloIsmiBul() + " SET "
+                    liste1 = self.SutunBul()
+                    liste2 = self.DegerBul()
+                    for i in range(0,len(liste1)):
+                        sorgu += liste1[i] + "=" + str(liste2[i]) + ","
+                    sorgu = sorgu[0:len(sorgu)-1]
+                    sorgu += " WHERE ID = " + str(self.IDBul())
+                adim = "2A"
+                cur.execute(sorgu)
+                adim = "1"
+            except:
+                adim = "Hata:"+adim+"Sorgu:"+sorgu
+            finally:
+                baglanti.commit()
+                baglanti.close()
+                return adim    
+    def DeleteWithID(self,**kwargs):
+            import sqlite3
+            adim = 0
+            self.sozluk = kwargs
+            try:
+                adim = "-1"
+                baglanti = sqlite3.connect(self.adres)
+                adim = "1A"
+                cur = baglanti.cursor()
+                sorgu = "DELETE FROM " +self.TabloIsmiBul() + " WHERE ID = " +str(self.IDBul())
+               
+                adim = "2A"
+                cur.execute(sorgu)
+                adim = "1"
+            except:
+                adim = "Hata:"+adim+"Sorgu:"+sorgu
+            finally:
+                baglanti.commit()
+                baglanti.close()
+                return adim 
 
 
