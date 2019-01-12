@@ -103,7 +103,9 @@ class VeriTabani():
                     sorgu += " WHERE ID = " + str(self.IDBul())
                 adim = "2A"
                 cur.execute(sorgu)
-                adim = "1"
+                adim = sorgu
+                # adim = "1"
+                
             except:
                 adim = "Hata:"+adim+"Sorgu:"+sorgu
             finally:
