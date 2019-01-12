@@ -8,4 +8,10 @@ class OgrenciDB(VeriTabani):
     def OgrenciEkle(self,Degerler = []):
         sonuc = self.insert(Tablo=self.TabloAdi,Sutun=self.Sutun,Deger=Degerler)
         return sonuc
+    def OgrenciGuncelle(self,Degerler=[],ID=0):
+        sonuc = self.UpdateWithID(Tablo=self.TabloAdi,Sutun=self.Sutun,Deger=Degerler,ID=ID)
+        return sonuc
+    def OgrListeGetir(self):
+        sonuc = self.select(Tablo="V_OGRENCI_LISTE")
+        return sonuc
      
