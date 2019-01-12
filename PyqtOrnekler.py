@@ -1,20 +1,45 @@
+from PyQt5.QtWidgets import QApplication,QGridLayout,QWidget,QCheckBox
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QIcon
-class App(QWidget):
+
+class Window(QWidget):
     def __init__(self):
-        super().__init__()
-        self.title = 'PyQt5 örnek window'
-        self.left = 10
-        self.top = 10
-        self.width = 640
-        self.height = 480
-        self.initUI()
-    def initUI(self):
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
-        self.show()
+        QWidget().__init__(self)
+        layout = QGridLayout()
+        self.setLayout(layout)
+        self.checkbox1 = QCheckBox("Kestrel")
+        self.checkbox1.setChecked(True)
+        self.checkbox1.toggled.connect(self.checkbox_toggled)
+        layout.addWidget(self.checkbox1, 0, 0)
+
+        self.checkbox2 = QCheckBox("Sparrowhawk")
+        self.checkbox2.toggled.connect(self.checkbox_toggled)
+        layout.addWidget(self.checkbox2, 1, 0)
+
+        self.checkbox3 = QCheckBox("Hobby")
+        self.checkbox3.toggled.connect(self.checkbox_toggled)
+        layout.addWidget(self.checkbox3, 2, 0)
+
+    
+    def checkbox_toggled(self):
+        selected = []
+
+        if self.checkbox1.isChecked():
+            selected.append("Kestrel")
+
+        if self.checkbox2.isChecked():
+            selected.append("Sparrowhawk")
+
+        if self.checkbox3.isChecked():
+            selected.append("Hobby")
+
+        print("Selected: %s" % (" ".join(selected)))
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = App()
+
+    screen = Window()
+    screen.show()
+
     sys.exit(app.exec_())
+

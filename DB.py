@@ -51,7 +51,8 @@ class VeriTabani():
             if key.upper() == "DEGER":
                 liste = value
         return liste
-
+    def strGonder(self,metin):
+        return "'" + metin + "'"
     def insert(self,**kwargs):
         import sqlite3
         adim = 0
@@ -132,5 +133,6 @@ class VeriTabani():
                 baglanti.commit()
                 baglanti.close()
                 return adim 
+    
 
 

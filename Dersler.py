@@ -22,3 +22,9 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
     sys.exit(app.exec_()) 
+    
+    
+    
+    python -m pip install --upgrade pip
+    
+    pip install PyQt5Designer
