@@ -4,6 +4,7 @@ class VeriTabani():
     
     def select(self,**kwargs):
         import sqlite3
+        self.sozluk = kwargs
         try:
             adim = "1"
             liste = []
@@ -14,6 +15,13 @@ class VeriTabani():
             for key,value in kwargs.items():
                 if key=="Tablo":
                     sorgu += value
+            liste = self.SutunBul()
+            liste2 = self.DegerBul()
+            if len(liste) > 0 and len(liste2) >0:
+                sorgu += " WHERE "
+                for i in range(0,len(liste)):
+                    sorgu += liste[i] + "=" + str(liste2[i]) + " AND "
+                sorgu = sorgu[0:len(sorgu)-4]                
             adim = "2A"
             cur.execute(sorgu)
             liste = cur.fetchall()
