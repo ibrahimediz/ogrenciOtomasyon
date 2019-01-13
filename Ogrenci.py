@@ -10,6 +10,7 @@ class App(QMainWindow):
         uic.loadUi(r'D:\İbrahim EDİZ\Projem\ogrenciOtomasyon\Ogrenci.ui', self)
         self.Kaydet.clicked.connect(self.oKaydet)
         self.btGuncelle.clicked.connect(self.oGuncelle)
+        self.btSil.clicked.connect(self.oSil)
         self.ogrListeDoldur()
         self.show()
     def oKaydet(self):
@@ -24,6 +25,7 @@ class App(QMainWindow):
         sonuc = self.veri.OgrenciEkle(Degerler=[tc,adi,soyadi,cinsiyet])
         if sonuc == "1":
             QMessageBox.information(self,"Bilgi","Kayıt İşlemi Başarılı",QMessageBox.Ok,QMessageBox.Ok)
+            self.ogrListeDoldur()
         else:
             print(sonuc)
     def oGuncelle(self):
@@ -39,6 +41,14 @@ class App(QMainWindow):
         sonuc = self.veri.OgrenciGuncelle(Degerler=[tc,adi,soyadi,cinsiyet],ID=ID)
         if sonuc == "1":
             QMessageBox.information(self,"Bilgi","Güncelleme İşlemi Başarılı",QMessageBox.Ok,QMessageBox.Ok)
+            self.ogrListeDoldur()
+        else:
+            print(sonuc)
+    def oSil(self):
+        ID = int(self.lblogrno.text())
+        sonuc = self.veri.OgrenciSil(ID=ID)
+        if sonuc == "1":
+            QMessageBox.information(self,"Bilgi","Silme İşlemi Başarılı",QMessageBox.Ok,QMessageBox.Ok)
             self.ogrListeDoldur()
         else:
             print(sonuc)
